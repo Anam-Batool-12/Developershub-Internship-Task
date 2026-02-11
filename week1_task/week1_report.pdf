@@ -1,0 +1,23 @@
+
+WEEK 1 — SECURITY ASSESSMENT REPORT
+Name: Anam Batool  DHC-4272
+Application Tested
+Name: OWASP Juice Shop
+URL: http://localhost:3000
+Purpose: Web Security Testing Lab
+Vulnerabilities Found                                                                                                                                                                  1. Cross-Site Scripting (XSS)
+Description: The app executes injected JavaScript input.
+Proof: <script>alert('XSS');</script> triggered popup.
+2. Weak Password Policy                                                                                                                                             Description: The app allows very weak passwords like 12345.
+Secure Areas                                                                                                                                                                SQL Injection Test                                                                                                                                                             Result: Login bypass attempt failed.
+
+Areas of Improvement
+•	Input validation and output encoding
+•	Strong password enforcement
+•	Secure authentication handling
+•	Web security best practices
+________________________________________
+Conclusion
+The application contains security weaknesses that require improvement, especially in input sanitization and password security.
+
+
