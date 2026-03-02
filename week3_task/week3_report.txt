@@ -1,0 +1,83 @@
+===============================
+Internship Week 3 Report
+Advanced Security & Logging
+===============================
+1. Objective
+--------------------------------
+- Implement basic logging for the application using Node.js and Winston.
+- Perform basic penetration testing on localhost.
+- Create a security best practices checklist for the application.
+
+--------------------------------
+2. Penetration Testing
+--------------------------------
+Target: localhost (127.0.0.1)
+Command used: nmap -sS -sV 127.0.0.1
+
+Result:
+- All 1000 scanned ports on localhost are closed.
+- No services listening on default ports.
+- Explanation: The Node.js logging application does not open any network ports, so no vulnerabilities detected at the network layer.
+
+Optional: Open test port for demonstration
+- Created a simple Express.js server on port 3000
+- Nmap scan result shows port 3000 open, service: Node.js/Express
+- Screenshot saved in 'screenshots/nmap_port3000.png' for documentation.
+
+--------------------------------
+3. Logging Implementation
+--------------------------------
+- Installed Winston library: npm install winston
+- Created 'app.js' with the following snippet:
+
+    const winston = require('winston');
+
+    const logger = winston.createLogger({
+      level: 'info',
+      format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.printf(({ timestamp, level, message }) => {
+          return `${timestamp} [${level.toUpperCase()}]: ${message}`;
+        })
+      ),
+      transports: [
+        new winston.transports.Console(),
+        new winston.transports.File({ filename: 'security.log' })
+      ]
+    });
+
+    logger.info('Application started');
+    logger.warn('Suspicious activity detected');
+    logger.error('Failed login attempt');
+
+Result:
+- Console output:
+  2026-02-26T05:47:10.668Z [INFO]: Application started
+  2026-02-26T05:47:10.671Z [WARN]: Suspicious activity detected
+  2026-02-26T05:47:10.671Z [ERROR]: Failed login attempt
+
+- File output: 'security.log' contains the same entries.
+
+--------------------------------
+4. Security Best Practices Checklist
+--------------------------------
+| Area                | Best Practice               | Implementation Example              |
+|--------------------|----------------------------|-----------------------------------|
+| Input Validation    | Validate all inputs        | Regex & type checks               |
+| Transport Security  | Use HTTPS for requests     | TLS enabled                        |
+| Password Security   | Hash & salt passwords      | bcrypt library                     |
+| Logging             | Track critical events      | Winston logs implemented           |
+| Session Security    | Secure cookies             | HttpOnly, Secure flags             |
+| Error Handling      | Hide stack traces          | Custom error messages              |
+| Dependencies        | Keep libraries updated     | npm audit, pip-audit               |
+
+--------------------------------
+5. Learning Outcomes
+--------------------------------
+- Implemented centralized logging for monitoring application events.
+- Learned how to simulate and interpret penetration testing results.
+- Applied core security best practices in a Node.js application.
+- Documented results in a clear, professional format for internship reporting.
+
+--------------------------------
+
