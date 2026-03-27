@@ -1,0 +1,18 @@
+1. Executive Summary
+
+Purpose of audit & scope.
+
+2. Methodology
+
+Tools used:
+
+OWASP ZAP
+Nikto
+Lynis
+Burp Suite
+Metasploit
+3. Findings Table
+Vulnerability	Risk	Status
+XSS	High	Fixed
+Missing Headers	Medium	Fixed
+Outdated Package	Medium	Patched
